@@ -23,6 +23,11 @@
    :phases
    {:configure
     (api/plan-fn
+     (act/package-source "debian-backports" :aptitude
+                         {:url "http://backports.debian.org/debian-backports"
+                          :release "squeeze-backports"
+                          :scopes ["main"]})
+
      (act/package-source "postgresql-pgdg" :aptitude
                          {:url "http://apt.postgresql.org/pub/repos/apt/"
                           :release "squeeze-pgdg"
@@ -30,6 +35,7 @@
                           :key-url "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"})
      (act/package-manager :update)
      (act/package "postgresql")
+     (act/package "nginx-full" :enable "squeeze-backports")
      )}))
 
 (def unit-load
