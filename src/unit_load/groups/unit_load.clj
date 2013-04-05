@@ -23,7 +23,7 @@
    :phases
    {:configure
     (api/plan-fn
-     (act/package-source "debian-backports" :aptitude
+     (act/package-source "postgresql-pgdg" :aptitude
                          {:url "http://apt.postgresql.org/pub/repos/apt/"
                           :release "squeeze-pgdg"
                           :scopes ["main"]
