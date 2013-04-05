@@ -1,7 +1,7 @@
 (ns unit-load.groups.unit-load
   (:require
    [pallet.api :as api]
-   [pallet.crate.automated-admin-user :refer [automated-admin-user]]
+   [pallet.crate.automated-admin-user :refer [with-automated-admin-user]]
    pallet.crate.java
    [pallet.crate.etc-hosts :as etc-hosts]
    [pallet.actions :as act]))
@@ -10,13 +10,6 @@
   (api/node-spec
    :image {:os-family :debian}
    :hardware {:min-cores 1}))
-
-(def base-server
-  (api/server-spec
-   :phases
-   {:bootstrap (api/plan-fn
-                (automated-admin-user)
-                (act/package-manager :update))}))
 
 (def unit-load-server
   (api/server-spec
@@ -43,6 +36,6 @@
 (def unit-load
   (api/group-spec
    "unit-load"
-   :extends [base-server unit-load-server]
+   :extends [with-automated-admin-user unit-load-server]
    :node-spec default-node-spec
    :count 1))
