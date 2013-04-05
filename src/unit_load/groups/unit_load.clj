@@ -3,6 +3,7 @@
    [pallet.api :as api]
    [pallet.crate.automated-admin-user :refer [automated-admin-user]]
    pallet.crate.java
+   [pallet.crate.etc-hosts :as etc-hosts]
    [pallet.actions :as act]))
 
 (def default-node-spec
@@ -21,7 +22,8 @@
   (api/server-spec
    :extends [(pallet.crate.java/server-spec {})]
    :phases
-   {:configure
+   {:bootstrap (api/plan-fn (etc-hosts/set-hostname))
+    :configure
     (api/plan-fn
      (act/package-source "debian-backports" :aptitude
                          {:url "http://backports.debian.org/debian-backports"
