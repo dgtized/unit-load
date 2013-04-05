@@ -21,9 +21,16 @@
   (api/server-spec
    :extends [(pallet.crate.java/server-spec {})]
    :phases
-   {:configure (api/plan-fn
-                ;; Add your crate class here
-                 )}))
+   {:configure
+    (api/plan-fn
+     (act/package-source "debian-backports" :aptitude
+                         {:url "http://apt.postgresql.org/pub/repos/apt/"
+                          :release "squeeze-pgdg"
+                          :scopes ["main"]
+                          :key-url "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"})
+     (act/package-manager :update)
+     (act/package "postgresql")
+     )}))
 
 (def unit-load
   (api/group-spec
