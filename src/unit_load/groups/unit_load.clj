@@ -3,7 +3,7 @@
    [pallet.api :as api]
    [pallet.crate.automated-admin-user :refer [automated-admin-user]]
    pallet.crate.java
-   pallet.actions))
+   [pallet.actions :as act]))
 
 (def default-node-spec
   (api/node-spec
@@ -15,7 +15,7 @@
    :phases
    {:bootstrap (api/plan-fn
                 (automated-admin-user)
-                (pallet.actions/package-manager :update))}))
+                (act/package-manager :update))}))
 
 (def unit-load-server
   (api/server-spec
