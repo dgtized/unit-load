@@ -31,6 +31,7 @@
      (act/package-manager :update)
      (act/package "postgresql")
      (act/package "nginx-full" :enable "squeeze-backports")
+     (act/service "nginx" :action :start)
      )}))
 
 (def unit-load
