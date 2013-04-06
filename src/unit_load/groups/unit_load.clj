@@ -3,7 +3,6 @@
    [pallet.api :as api]
    [pallet.crate.automated-admin-user :refer [with-automated-admin-user]]
    pallet.crate.java
-   pallet.crate.package.debian-backports
    [pallet.crate.etc-hosts :as etc-hosts]
    [pallet.actions :as act]))
 
@@ -19,7 +18,11 @@
    {:bootstrap (api/plan-fn (etc-hosts/set-hostname))
     :configure
     (api/plan-fn
-     (pallet.crate.package.debian-backports/add-debian-backports)
+     (act/package-source "debian-backports" :aptitude
+                         {:url "http://backports.debian.org/debian-backports"
+                          :release "squeeze-backports"
+                          :scopes ["main"]})
+
      (act/package-source "postgresql-pgdg" :aptitude
                          {:url "http://apt.postgresql.org/pub/repos/apt/"
                           :release "squeeze-pgdg"
