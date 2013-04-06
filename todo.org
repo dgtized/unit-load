@@ -1,0 +1,5 @@
+* Errors
+** If you restart your computer with vboxwebsrv running a node, lein
+   pallet down does not clear out the node, and makes things stuck.
+** add-debian-backports fails because it's reading the comment on the first line
+
