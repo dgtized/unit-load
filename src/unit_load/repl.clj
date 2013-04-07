@@ -4,6 +4,7 @@
             pallet.compute
             pallet.compute.vmfest
             pallet.crate
+            [clojure.tools.logging :as logging]
             [pallet.stevedore :as stevedore]
             [pallet.api :as api]
             [pallet.script.lib :as lib]
@@ -15,10 +16,11 @@
   (pallet.core/converge ul/unit-load
                         :compute (pallet.compute/instantiate-provider :vmfest))
   (use-pallet)
-  (pallet.core/lift
+  (pallet.core/converge
    (assoc-in ul/unit-load [:phases :test]
              (api/plan-fn
-              (stevedore/script (~lib/os-version-name))))
-   :compute (pallet.compute/instantiate-provider :vmfest)
-   :phase test)
+              (logging/debugf "blagh %s" i)
+                                        ;(stevedore/script (~lib/os-version-name))
+              ))
+   :compute (pallet.compute/instantiate-provider :vmfest))
   )
