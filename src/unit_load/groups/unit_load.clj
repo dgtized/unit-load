@@ -4,7 +4,8 @@
    [pallet.crate.automated-admin-user :refer [with-automated-admin-user]]
    pallet.crate.java
    [pallet.crate.etc-hosts :as etc-hosts]
-   [pallet.actions :as act]))
+   [pallet.actions :as act]
+   unit-load.crates.postgresql))
 
 (def default-node-spec
   (api/node-spec
@@ -13,7 +14,8 @@
 
 (def unit-load-server
   (api/server-spec
-   :extends [(pallet.crate.java/server-spec {})]
+   :extends [(pallet.crate.java/server-spec {})
+             (unit-load.crates.postgresql/server-spec {})]
    :phases
    {:bootstrap (api/plan-fn (etc-hosts/set-hostname))
     :configure
@@ -23,13 +25,7 @@
                           :release "squeeze-backports"
                           :scopes ["main"]})
 
-     (act/package-source "postgresql-pgdg" :aptitude
-                         {:url "http://apt.postgresql.org/pub/repos/apt/"
-                          :release "squeeze-pgdg"
-                          :scopes ["main"]
-                          :key-url "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"})
      (act/package-manager :update)
-     (act/package "postgresql")
      (act/package "nginx-full" :enable "squeeze-backports")
      (act/service "nginx" :action :start)
      )}))
