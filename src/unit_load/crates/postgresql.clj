@@ -37,4 +37,4 @@
    :phases
    {:settings (api/plan-fn
                (unit-load.crates.postgresql/settings (merge settings options)))
-    :configure (api/plan-fn (install options))}))
+    :install (api/plan-fn (install options))}))
