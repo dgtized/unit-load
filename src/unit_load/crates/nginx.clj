@@ -11,9 +11,9 @@
   {:install-strategy :package-source
    :package-source
    {:name "debian-backports"
-    :url "http://backports.debian.org/debian-backports"
-    :release "squeeze-backports"
-    :scopes ["main"]}
+    :aptitude {:url "http://backports.debian.org/debian-backports"
+               :release "squeeze-backports"
+               :scopes ["main"]}}
    :packages ["nginx-full"]})
 
 (crate/defplan settings
