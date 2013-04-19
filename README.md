@@ -1,6 +1,6 @@
 # Unit-Load
 
-Pallet infrastructure for a Clojure website
+Pallet infrastructure for a Clojure Webapp
 
 ## Overview
 

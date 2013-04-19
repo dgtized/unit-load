@@ -1,5 +1,5 @@
 (defproject unit-load "0.1.0-SNAPSHOT"
-  :description "Pallet infrastructure for a Clojure website"
+  :description "Pallet infrastructure for a Clojure Webapp"
   :url "https://github.com/dgtized/unit-load"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
