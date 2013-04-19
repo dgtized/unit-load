@@ -5,7 +5,8 @@
    pallet.crate.java
    [pallet.crate.etc-hosts :as etc-hosts]
    [pallet.actions :as act]
-   unit-load.crates.postgresql))
+   unit-load.crates.postgresql
+   unit-load.crates.nginx))
 
 (def default-node-spec
   (api/node-spec
@@ -15,20 +16,10 @@
 (def unit-load-server
   (api/server-spec
    :extends [(pallet.crate.java/server-spec {})
-             (unit-load.crates.postgresql/server-spec {})]
+             (unit-load.crates.postgresql/server-spec {})
+             (unit-load.crates.nginx/server-spec {})]
    :phases
-   {:bootstrap (api/plan-fn (etc-hosts/set-hostname))
-    :configure
-    (api/plan-fn
-     (act/package-source "debian-backports" :aptitude
-                         {:url "http://backports.debian.org/debian-backports"
-                          :release "squeeze-backports"
-                          :scopes ["main"]})
-
-     (act/package-manager :update)
-     (act/package "nginx-full" :enable "squeeze-backports")
-     (act/service "nginx" :action :start)
-     )}))
+   {:bootstrap (api/plan-fn (etc-hosts/set-hostname))}))
 
 (def unit-load
   (api/group-spec
