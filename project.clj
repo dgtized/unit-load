@@ -9,7 +9,7 @@
                  [org.clojars.tbatchelli/vboxjws "4.2.6"]
                  [ch.qos.logback/logback-classic "1.0.11"]
 
-                 [com.palletops/java-crate "0.8.0-beta.3"]]
+                 [com.palletops/java-crate "0.8.0-beta.4"]]
   :repositories {"sonatype"
                  "http://oss.sonatype.org/content/repositories/releases"}
   :plugins [[com.palletops/pallet-lein "0.6.0-beta.9"]]
