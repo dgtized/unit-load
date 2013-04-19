@@ -15,7 +15,8 @@
                :release "squeeze-pgdg"
                :scopes ["main"]
                :key-url "http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc"}}
-   :packages ["postgresql"]})
+   :packages ["postgresql"]
+   :package-options {:enable "postgresql-pgdg"}})
 
 (crate/defplan settings
   "Settings for postgresql"
