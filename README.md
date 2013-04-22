@@ -12,7 +12,7 @@ Software provided in this stack thus far:
 
  * Nginx
  * Postgresql 9.2
- * Java
+ * Java 1.6
 
 At the moment it's mostly acting as a test bed to play around with
 Pallet, but the end goal is to be basic open infrastructure.
@@ -22,6 +22,7 @@ Pallet, but the end goal is to be basic open infrastructure.
 Install Virtualbox and Leiningen
 
 ```
+$ VBoxManage setproperty websrvauthlibrary null # first time only
 $ vboxwebsrv -t0 # in a separate shell
 $ lein pallet add-vmfest-image \
         https://s3.amazonaws.com/vmfest-images/debian-6.0.2.1-64bit-v0.3.vdi.gz
